@@ -17,8 +17,6 @@ font-family:Arial,sans-serif;
 overflow:hidden;
 }
 
-/* Card */
-
 .card{
 background:rgba(255,255,255,.25);
 backdrop-filter:blur(12px);
@@ -28,9 +26,22 @@ text-align:center;
 box-shadow:0 20px 40px rgba(0,0,0,.3);
 position:relative;
 z-index:5;
+width:320px;
 }
 
-img{width:180px;border-radius:20px;}
+img{
+width:180px;
+border-radius:20px;
+transition:.5s;
+}
+
+#photoReveal{
+display:none;
+margin-top:15px;
+width:200px;
+border-radius:20px;
+box-shadow:0 0 25px pink;
+}
 
 h1{color:white;}
 
@@ -50,11 +61,10 @@ transition:.3s;
 
 #no{background:white;color:#ff2d55;margin-left:20px;}
 
-#msg{
-display:none;
-margin-top:20px;
+#typing{
 color:white;
-font-size:22px;
+margin-top:15px;
+min-height:40px;
 }
 
 /* Floating hearts */
@@ -113,7 +123,7 @@ border-radius:50%;
 to{transform:translateY(100vh) rotate(720deg);opacity:0;}
 }
 
-/* 🌹 Blooming Rose */
+/* 🌹 Rose */
 
 .rose{
 position:fixed;
@@ -121,7 +131,7 @@ bottom:30px;
 left:50%;
 transform:translateX(-50%) scale(0);
 font-size:80px;
-animation:bloom 2.5s ease forwards;
+animation:bloom 2.5s ease forwards, glow 2s infinite alternate;
 z-index:10;
 }
 
@@ -129,6 +139,11 @@ z-index:10;
 0%{transform:translateX(-50%) scale(0);}
 60%{transform:translateX(-50%) scale(1.4);}
 100%{transform:translateX(-50%) scale(1);}
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px pink;}
+to{text-shadow:0 0 40px hotpink;}
 }
 </style>
 </head>
@@ -138,21 +153,24 @@ z-index:10;
 <div class="card">
 <img id="gif" src="./public/images/mid.gif">
 
-<h1>Will you be my Valentine? 💖</h1>
+<h1 id="question">Will you be my Valentine? 💖</h1>
 
 <div class="buttons">
 <button id="yes">Yes 🥰</button>
 <button id="no">No 🙄</button>
 </div>
 
-<div id="msg">Yepppieee 💕 See you sooooonnn :3</div>
+<div id="typing"></div>
+
+<img id="photoReveal" src="./public/images/photo.jpg">
 </div>
 
 <script>
 const noBtn=document.getElementById("no");
 const yesBtn=document.getElementById("yes");
-const msg=document.getElementById("msg");
 const gif=document.getElementById("gif");
+const typing=document.getElementById("typing");
+const photo=document.getElementById("photoReveal");
 
 /* NO escape */
 
@@ -185,33 +203,47 @@ document.querySelector(".card").appendChild(s);
 setTimeout(()=>s.remove(),1500);
 },300);
 
+/* Typing effect */
+
+function typeText(text){
+let i=0;
+typing.innerHTML="";
+let interval=setInterval(()=>{
+typing.innerHTML+=text.charAt(i);
+i++;
+if(i>=text.length) clearInterval(interval);
+},60);
+}
+
 /* YES CLICK */
 
 yesBtn.onclick=()=>{
-msg.style.display="block";
 gif.src="./public/images/happy.gif";
 
-/* 🌹 Bloom rose */
+/* typing proposal */
+
+typeText("I promise to make you smile every day 💕 Will you be mine forever?");
+
+/* photo reveal */
+
+setTimeout(()=>photo.style.display="block",2000);
+
+/* rose */
+
 let rose=document.createElement("div");
 rose.className="rose";
 rose.innerHTML="🌹";
 document.body.appendChild(rose);
 
-/* Heart confetti */
+/* heart confetti */
 
 for(let i=0;i<150;i++){
 let h=document.createElement("div");
 h.className="heart";
-
-let size=Math.random()*15+10;
-h.style.width=size+"px";
-h.style.height=size+"px";
-
 h.style.left=Math.random()*100+"vw";
 h.style.top="-20px";
 h.style.background=`hsl(${Math.random()*360},100%,70%)`;
 h.style.animationDuration=(Math.random()*2+3)+"s";
-
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),5000);
 }

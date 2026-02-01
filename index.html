@@ -2,85 +2,121 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Will you be my Valentine?</title>
 
 <style>
-body {
-  margin:0;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:linear-gradient(135deg,#ff758c,#ff7eb3);
-  font-family:Arial;
-  overflow:hidden;
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+font-family:Arial,sans-serif;
+overflow:hidden;
 }
 
-.card {
-  background:rgba(255,255,255,.25);
-  backdrop-filter:blur(12px);
-  padding:40px;
-  border-radius:25px;
-  text-align:center;
-  box-shadow:0 20px 40px rgba(0,0,0,.3);
+/* Card */
+
+.card{
+background:rgba(255,255,255,.25);
+backdrop-filter:blur(12px);
+padding:40px;
+border-radius:25px;
+text-align:center;
+box-shadow:0 20px 40px rgba(0,0,0,.3);
+position:relative;
+z-index:5;
 }
 
-img {
-  width:180px;
-  border-radius:20px;
+img{width:180px;border-radius:20px;}
+
+h1{color:white;}
+
+.buttons{margin-top:25px;}
+
+button{
+padding:12px 30px;
+border:none;
+border-radius:25px;
+font-size:18px;
+cursor:pointer;
+transition:.3s;
 }
 
-h1 {
-  color:white;
+#yes{background:#ff2d55;color:white;}
+#yes:hover{transform:scale(1.1);}
+
+#no{background:white;color:#ff2d55;margin-left:20px;}
+
+#msg{
+display:none;
+margin-top:20px;
+color:white;
+font-size:22px;
 }
 
-.buttons {
-  margin-top:25px;
+/* Floating background hearts */
+
+.bg-heart{
+position:fixed;
+font-size:20px;
+animation:floatUp linear infinite;
+opacity:.6;
 }
 
-button {
-  padding:12px 30px;
-  border:none;
-  border-radius:25px;
-  font-size:18px;
-  cursor:pointer;
-  transition:.3s;
+@keyframes floatUp{
+from{transform:translateY(100vh);}
+to{transform:translateY(-10vh);}
 }
 
-#yes {
-  background:#ff2d55;
-  color:white;
+/* Sparkles */
+
+.sparkle{
+position:absolute;
+width:6px;
+height:6px;
+background:white;
+border-radius:50%;
+animation:spark 1.5s ease-out forwards;
 }
 
-#yes:hover {
-  transform:scale(1.1);
+@keyframes spark{
+to{
+transform:scale(0);
+opacity:0;
+}
 }
 
-#no {
-  background:white;
-  color:#ff2d55;
-  margin-left:20px;
+/* Heart confetti */
+
+.heart{
+position:fixed;
+width:18px;
+height:18px;
+background:red;
+transform:rotate(45deg);
+animation:fall 4s linear forwards;
 }
 
-#msg {
-  display:none;
-  margin-top:20px;
-  color:white;
-  font-size:22px;
+.heart:before,.heart:after{
+content:"";
+position:absolute;
+width:18px;
+height:18px;
+background:red;
+border-radius:50%;
 }
 
-.confetti {
-  position:fixed;
-  width:12px;
-  height:12px;
-  animation:fall 3s linear forwards;
-}
+.heart:before{top:-9px;}
+.heart:after{left:-9px;}
 
-@keyframes fall {
-  to {
-    transform:translateY(100vh) rotate(720deg);
-    opacity:0;
-  }
+@keyframes fall{
+to{
+transform:translateY(100vh) rotate(720deg);
+opacity:0;
+}
 }
 </style>
 </head>
@@ -88,15 +124,15 @@ button {
 <body>
 
 <div class="card">
-  <img id="gif" src="./public/images/mid.gif">
-  <h1>Will you be my Valentine? 💖</h1>
+<img id="gif" src="./public/images/mid.gif">
+<h1>Will you be my Valentine? 💖</h1>
 
-  <div class="buttons">
-    <button id="yes">Yes 🥰</button>
-    <button id="no">No 🙄</button>
-  </div>
+<div class="buttons">
+<button id="yes">Yes 🥰</button>
+<button id="no">No 🙄</button>
+</div>
 
-  <div id="msg">Yepppieee 💕 See you sooooonnn :3</div>
+<div id="msg">Yepppieee 💕 See you sooooonnn :3</div>
 </div>
 
 <script>
@@ -105,27 +141,61 @@ const yesBtn=document.getElementById("yes");
 const msg=document.getElementById("msg");
 const gif=document.getElementById("gif");
 
+/* NO button run */
+
 noBtn.addEventListener("mouseover",()=>{
-  noBtn.style.position="absolute";
-  noBtn.style.left=Math.random()*80+"%";
-  noBtn.style.top=Math.random()*80+"%";
+noBtn.style.position="absolute";
+noBtn.style.left=Math.random()*80+"%";
+noBtn.style.top=Math.random()*80+"%";
 });
 
+/* Floating hearts background */
+
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="bg-heart";
+h.innerHTML="💗";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=Math.random()*5+5+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),10000);
+},400);
+
+/* Sparkles */
+
+setInterval(()=>{
+let s=document.createElement("div");
+s.className="sparkle";
+s.style.left=Math.random()*200+"px";
+s.style.top=Math.random()*200+"px";
+document.querySelector(".card").appendChild(s);
+setTimeout(()=>s.remove(),1500);
+},300);
+
+/* YES CLICK */
+
 yesBtn.onclick=()=>{
-  msg.style.display="block";
-  gif.src="./public/images/happy.gif";
+msg.style.display="block";
+gif.src="./public/images/happy.gif";
 
-  // BIG CONFETTI
-  for(let i=0;i<150;i++){
-    let c=document.createElement("div");
-    c.className="confetti";
-    c.style.left=Math.random()*100+"vw";
-    c.style.top="-20px";
-    c.style.background=`hsl(${Math.random()*360},100%,70%)`;
-    document.body.appendChild(c);
+/* Heart confetti */
 
-    setTimeout(()=>c.remove(),3000);
-  }
+for(let i=0;i<150;i++){
+let h=document.createElement("div");
+h.className="heart";
+
+let size=Math.random()*15+10;
+h.style.width=size+"px";
+h.style.height=size+"px";
+
+h.style.left=Math.random()*100+"vw";
+h.style.top="-20px";
+h.style.background=`hsl(${Math.random()*360},100%,70%)`;
+h.style.animationDuration=(Math.random()*2+3)+"s";
+
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+}
 };
 </script>
 

@@ -1,2 +1,2 @@
-=link: [Click Here](https://aayush-683.github.io/will-you-be-my-valentine/)
+link: [Click Here](https://aayush-683.github.io/will-you-be-my-valentine/)
 

@@ -1,25 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Samanwita Dutta - ❤️</title>
-    <link rel="stylesheet" href="./public/css/style.css" />
-  </head>
-  <body>
-    <div class="container">
-      <div class="banner-gif">
-        <img id="banner" src="./public/images/mid.gif" alt="banner" />
-      </div>
-      <h1 id="question-heading">Will you be my valentine?</h1>
-      <div class="buttons">
-        <button id="yes-button"><p>Yes</p></button>
-        <button id="no-button"><p>No</p></button>
-      </div>
-      <div class="message">
-        <h2 id="success-message">Yepppie, see you sooonnn :3</h2>        
-      </div>
-    </div>
-    <script src="./public/js/script.js"></script>
-  </body>
+<head>
+<meta charset="UTF-8">
+<title>Will you be my Valentine?</title>
+
+<style>
+body {
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  font-family:Arial;
+  overflow:hidden;
+}
+
+.card {
+  background:rgba(255,255,255,.25);
+  backdrop-filter:blur(12px);
+  padding:40px;
+  border-radius:25px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
+}
+
+img {
+  width:180px;
+  border-radius:20px;
+}
+
+h1 {
+  color:white;
+}
+
+.buttons {
+  margin-top:25px;
+}
+
+button {
+  padding:12px 30px;
+  border:none;
+  border-radius:25px;
+  font-size:18px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+#yes {
+  background:#ff2d55;
+  color:white;
+}
+
+#yes:hover {
+  transform:scale(1.1);
+}
+
+#no {
+  background:white;
+  color:#ff2d55;
+  margin-left:20px;
+}
+
+#msg {
+  display:none;
+  margin-top:20px;
+  color:white;
+  font-size:22px;
+}
+
+.confetti {
+  position:fixed;
+  width:12px;
+  height:12px;
+  animation:fall 3s linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform:translateY(100vh) rotate(720deg);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <img id="gif" src="./public/images/mid.gif">
+  <h1>Will you be my Valentine? 💖</h1>
+
+  <div class="buttons">
+    <button id="yes">Yes 🥰</button>
+    <button id="no">No 🙄</button>
+  </div>
+
+  <div id="msg">Yepppieee 💕 See you sooooonnn :3</div>
+</div>
+
+<script>
+const noBtn=document.getElementById("no");
+const yesBtn=document.getElementById("yes");
+const msg=document.getElementById("msg");
+const gif=document.getElementById("gif");
+
+noBtn.addEventListener("mouseover",()=>{
+  noBtn.style.position="absolute";
+  noBtn.style.left=Math.random()*80+"%";
+  noBtn.style.top=Math.random()*80+"%";
+});
+
+yesBtn.onclick=()=>{
+  msg.style.display="block";
+  gif.src="./public/images/happy.gif";
+
+  // BIG CONFETTI
+  for(let i=0;i<150;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.top="-20px";
+    c.style.background=`hsl(${Math.random()*360},100%,70%)`;
+    document.body.appendChild(c);
+
+    setTimeout(()=>c.remove(),3000);
+  }
+};
+</script>
+
+</body>
 </html>

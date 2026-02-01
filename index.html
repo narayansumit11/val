@@ -57,7 +57,7 @@ color:white;
 font-size:22px;
 }
 
-/* Floating background hearts */
+/* Floating hearts */
 
 .bg-heart{
 position:fixed;
@@ -83,10 +83,7 @@ animation:spark 1.5s ease-out forwards;
 }
 
 @keyframes spark{
-to{
-transform:scale(0);
-opacity:0;
-}
+to{transform:scale(0);opacity:0;}
 }
 
 /* Heart confetti */
@@ -113,10 +110,25 @@ border-radius:50%;
 .heart:after{left:-9px;}
 
 @keyframes fall{
-to{
-transform:translateY(100vh) rotate(720deg);
-opacity:0;
+to{transform:translateY(100vh) rotate(720deg);opacity:0;}
 }
+
+/* 🌹 Blooming Rose */
+
+.rose{
+position:fixed;
+bottom:30px;
+left:50%;
+transform:translateX(-50%) scale(0);
+font-size:80px;
+animation:bloom 2.5s ease forwards;
+z-index:10;
+}
+
+@keyframes bloom{
+0%{transform:translateX(-50%) scale(0);}
+60%{transform:translateX(-50%) scale(1.4);}
+100%{transform:translateX(-50%) scale(1);}
 }
 </style>
 </head>
@@ -125,6 +137,7 @@ opacity:0;
 
 <div class="card">
 <img id="gif" src="./public/images/mid.gif">
+
 <h1>Will you be my Valentine? 💖</h1>
 
 <div class="buttons">
@@ -141,7 +154,7 @@ const yesBtn=document.getElementById("yes");
 const msg=document.getElementById("msg");
 const gif=document.getElementById("gif");
 
-/* NO button run */
+/* NO escape */
 
 noBtn.addEventListener("mouseover",()=>{
 noBtn.style.position="absolute";
@@ -149,7 +162,7 @@ noBtn.style.left=Math.random()*80+"%";
 noBtn.style.top=Math.random()*80+"%";
 });
 
-/* Floating hearts background */
+/* Floating hearts */
 
 setInterval(()=>{
 let h=document.createElement("div");
@@ -177,6 +190,12 @@ setTimeout(()=>s.remove(),1500);
 yesBtn.onclick=()=>{
 msg.style.display="block";
 gif.src="./public/images/happy.gif";
+
+/* 🌹 Bloom rose */
+let rose=document.createElement("div");
+rose.className="rose";
+rose.innerHTML="🌹";
+document.body.appendChild(rose);
 
 /* Heart confetti */
 

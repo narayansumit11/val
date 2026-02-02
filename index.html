@@ -331,6 +331,8 @@ Actually… No 😈
 
 </div>
 
+<div id="finalSections" style="display:none">
+
   <!-- Things I Love -->
 
 <div style="margin-top:50px;text-align:center">
@@ -399,7 +401,7 @@ Actually… No 😈
 </div>
 
 
-  
+</div>
 
 
 </div>
@@ -574,7 +576,16 @@ clearInterval(observer);
 envelope.onclick=()=>{
 envelope.classList.toggle("open");
 };
+const finalSections=document.getElementById("finalSections");
 
+/* show final sections after secret note */
+
+envelope.addEventListener("click",()=>{
+finalSections.style.display="block";
+});
+
+
+  
 
 
 

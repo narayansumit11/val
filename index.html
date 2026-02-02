@@ -149,6 +149,91 @@ z-index:10;
 from{text-shadow:0 0 10px pink;}
 to{text-shadow:0 0 40px hotpink;}
 }
+
+#envelope{
+width:200px;
+height:130px;
+margin:20px auto;
+background:#ff5c8a;
+border-radius:10px;
+position:relative;
+cursor:pointer;
+}
+
+#envelope:before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:50%;
+background:#ff87a2;
+clip-path:polygon(0 0,50% 60%,100% 0);
+}
+
+#letter{
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+height:0;
+background:white;
+overflow:hidden;
+transition:.6s;
+padding:10px;
+box-sizing:border-box;
+}
+
+#letter p{
+font-size:12px;
+color:#ff2d55;
+}
+
+.open #letter{
+height:160px;
+}
+
+
+.loveGrid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:10px;
+margin-top:20px;
+}
+
+.loveCard{
+background:linear-gradient(135deg,#ff5c8a,#ff87a2);
+padding:15px;
+border-radius:15px;
+color:white;
+transition:.3s;
+}
+
+.loveCard:hover{
+transform:scale(1.05);
+}
+
+.memoryGrid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+gap:15px;
+margin-top:20px;
+}
+
+.memoryCard img{
+width:100%;
+border-radius:15px;
+}
+
+.memoryCard p{
+color:white;
+font-size:12px;
+}
+
+
+
+
+  
 </style>
 </head>
 
@@ -220,6 +305,100 @@ Actually… No 😈
 </div>
 
 
+
+<div id="secretNote" style="display:none;margin-top:40px;text-align:center">
+
+<h2 style="color:#ff2d55">A Secret Note For You 💌</h2>
+<p style="color:white">Click the envelope to open it…</p>
+
+<div id="envelope">
+  <div id="letter">
+    <p>
+      <!-- WRITE YOUR MESSAGE HERE -->
+      My love…<br><br>
+
+      You mean everything to me.<br>
+      Every smile, every laugh, every moment with you is magic.
+      I promise to always stand by you, annoy you, protect you,
+      and love you endlessly 💕
+
+      <br><br>
+      Yours forever ❤️
+    </p>
+  </div>
+</div>
+
+</div>
+
+  <!-- Things I Love -->
+
+<div style="margin-top:50px;text-align:center">
+
+<h2 style="color:#ff2d55">Things I Love About You 💖</h2>
+
+<div class="loveGrid">
+
+<div class="loveCard">Your smile melts my heart 🥹</div>
+<div class="loveCard">You're funnier than my entire Instagram feed 😂</div>
+<div class="loveCard">Your voice > any song 🎵</div>
+<div class="loveCard">You understand my weird humor 😌</div>
+<div class="loveCard">Your chaotic energy matches mine 🔥</div>
+<div class="loveCard">You make me want to be less of a gandu 💕</div>
+<div class="loveCard">You're beautiful without even trying 🥰</div>
+<div class="loveCard">You're stuck with me now 😈</div>
+
+</div>
+</div>
+
+<!-- Memories -->
+
+<div style="margin-top:50px;text-align:center">
+
+<h2 style="color:#ff2d55">Our Favorite Memories 📸</h2>
+
+<div class="memoryGrid">
+
+<div class="memoryCard">
+<img src="./public/images/m1.jpg">
+<p>Catching you being adorable 🥹</p>
+</div>
+
+<div class="memoryCard">
+<img src="./public/images/m2.jpg">
+<p>That smile >>> everything 😍</p>
+</div>
+
+<div class="memoryCard">
+<img src="./public/images/m3.jpg">
+<p>Food + you = perfect ❤️</p>
+</div>
+
+<div class="memoryCard">
+<img src="./public/images/m4.jpg">
+<p>Just us, forever 💕</p>
+</div>
+
+</div>
+</div>
+
+<!-- Surprises -->
+
+<div style="margin-top:50px;text-align:center">
+
+<h2 style="color:#ff2d55">Secret Surprises 🎁</h2>
+
+<div style="margin-top:15px">
+
+<button onclick="alert('You get unlimited hugs 😘')">Surprise #1 💗</button>
+<button onclick="alert('Movie date coming soon 🎬')">Surprise #2 🍿</button>
+<button onclick="alert('Chocolate on the way 🍫')">Surprise #3 😋</button>
+<button onclick="alert('I love you more than food ❤️')">Surprise #4 😈</button>
+
+</div>
+</div>
+
+
+  
 
 
 </div>
@@ -376,6 +555,31 @@ tooLate.style.display="block";
 }
 
 });
+
+const secretNote=document.getElementById("secretNote");
+const envelope=document.getElementById("envelope");
+
+/* show secret note after TOO LATE */
+
+const observer=setInterval(()=>{
+if(tooLate.style.display==="block"){
+secretNote.style.display="block";
+clearInterval(observer);
+}
+},500);
+
+/* open envelope */
+
+envelope.onclick=()=>{
+envelope.classList.toggle("open");
+};
+
+
+
+
+
+
+  
 
 </script>
 

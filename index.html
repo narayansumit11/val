@@ -691,10 +691,7 @@ if(i>=text.length) clearInterval(interval);
 },60);
 }
 
-/* YES CLICK */
 
-yesBtn.onclick=()=>{
-gif.src="./public/images/happy.gif";
 
 /* typing proposal */
 
@@ -793,28 +790,41 @@ tooLate.style.display="block";
 
 let escapeCount=0;
 
-/* show good choice after YES */
 
-yesBtn.onclick = () => {
+  const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+
+/* NO button simple escape */
+
+noBtn.addEventListener("mouseover",()=>{
+noBtn.style.position="absolute";
+noBtn.style.left=Math.random()*70+"%";
+noBtn.style.top=Math.random()*70+"%";
+});
+
+/* YES CLICK */
+
+yesBtn.addEventListener("click",()=>{
 
 gif.src="./public/images/happy.gif";
 
-typeText("I promise to make you smile every day 💕 ❤️ 😘 🥰 💘 😍 💝 🤗 💖");
+/* typing */
+typeText("I promise to make you smile every day 💕 Will you be mine forever?");
 
+/* show photo */
 setTimeout(()=>photo.style.display="block",2000);
-  
-/* show section */
 
-setTimeout(()=>goodChoice.style.display="block",3000);
+/* show Good Choice */
+setTimeout(()=>goodChoice.style.display="block",2500);
 
-/* rose + confetti already here */
-
+/* 🌹 rose */
 let rose=document.createElement("div");
 rose.className="rose";
 rose.innerHTML="🌹";
-document.body.appendChild(rose);
+document.querySelector(".card").appendChild(rose);
 
-for(let i=0;i<120;i++){
+/* heart confetti */
+for(let i=0;i<100;i++){
 let h=document.createElement("div");
 h.className="heart";
 h.style.left=Math.random()*100+"vw";
@@ -824,7 +834,13 @@ h.style.animationDuration=(Math.random()*2+3)+"s";
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),5000);
 }
-};
+
+});
+
+
+
+
+
 
 
 

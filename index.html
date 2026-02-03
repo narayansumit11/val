@@ -41,6 +41,15 @@ max-width:800px;
 margin:20px auto;
 }
 
+@keyframes wiggle{
+0%{transform:rotate(0deg);}
+25%{transform:rotate(5deg);}
+50%{transform:rotate(-5deg);}
+75%{transform:rotate(5deg);}
+100%{transform:rotate(0deg);}
+}
+
+
 
 
 img{
@@ -529,8 +538,40 @@ setTimeout(()=>h.remove(),5000);
 
 
 const goodChoice=document.getElementById("goodChoice");
-const changeMind=document.getElementById("changeMind");
+
 const tooLate=document.getElementById("tooLate");
+
+changeMind.addEventListener("mouseover",()=>{
+
+escapeCount++;
+
+if(escapeCount===1){
+/* wiggle */
+changeMind.style.animation="wiggle .4s";
+setTimeout(()=>changeMind.style.animation="",400);
+}
+
+else if(escapeCount===2){
+/* shrink */
+changeMind.style.transform="scale(0.7)";
+changeMind.style.opacity="0.6";
+}
+
+else{
+
+/* escape */
+changeMind.style.position="absolute";
+changeMind.style.left=Math.random()*70+"%";
+changeMind.style.top=Math.random()*70+"%";
+
+setTimeout(()=>{
+changeMind.style.display="none";
+tooLate.style.display="block";
+},600);
+}
+
+});
+
 
 let escapeCount=0;
 

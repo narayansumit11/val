@@ -164,14 +164,29 @@ to{transform:translateY(100vh) rotate(720deg);opacity:0;}
 /* 🌹 Rose */
 
 .rose{
-position:fixed;
-bottom:30px;
+position:absolute;
+margin-top:30px;
 left:50%;
 transform:translateX(-50%) scale(0);
 font-size:80px;
-animation:bloom 2.5s ease forwards, glow 2s infinite alternate;
-z-index:10;
+animation:
+  bloom 2.5s ease forwards,
+  glow 2s infinite alternate,
+  floatUpOnce 3s ease forwards;
+z-index:2;
 }
+
+/* gentle upward movement */
+
+@keyframes floatUpOnce{
+0%{
+margin-top:30px;
+}
+100%{
+margin-top:-40px;
+}
+}
+
 
 @keyframes bloom{
 0%{transform:translateX(-50%) scale(0);}
@@ -507,7 +522,7 @@ Actually… No 😈
 
 <footer style="margin:60px 0 30px;text-align:center;color:white;font-size:14px;opacity:.8">
 Made with ❤️ by your officially obsessed boyfriend.<br>
-Warning: Once accepted, boyfriend cannot be returned 😌
+Warning: Once accepted, boyfriend cannot be returned 😌<br>
 End of website… but not end of us ❤️<br>
 Copyright © Forever. All rights reserved on you 😈
 </footer>

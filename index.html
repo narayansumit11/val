@@ -21,6 +21,21 @@ font-family:Arial,sans-serif;
 overflow-y:auto;
 }
 
+#movingHeart{
+font-size:40px;
+position:absolute;
+cursor:pointer;
+transition:.3s;
+}
+
+#playArea{
+border:2px dashed rgba(255,255,255,.4);
+border-radius:15px;
+max-width:300px;
+margin:auto;
+}
+
+
 
 .card{
 background:rgba(255,255,255,.25);
@@ -480,6 +495,28 @@ Actually… No 😈
   
   <br>
   <br>
+
+<!-- Catch My Heart Game -->
+
+<div id="heartGame" style="display:none;margin-top:50px;text-align:center;color:white">
+
+<h2 style="color:#ff2d55">Catch My Heart 💗</h2>
+<p>Catch my heart to unlock your secret note 😌</p>
+
+<div id="playArea" style="height:220px;position:relative;margin-top:20px">
+
+<div id="movingHeart">💗</div>
+
+</div>
+
+<p id="gameResult" style="display:none;margin-top:20px">
+You caught my heart 🥹<br>
+Which means… you already own it ❤️
+</p>
+
+</div>
+
+  
 <div id="secretNote" style="display:none;margin-top:40px;text-align:center">
 
 <h2 style="color:#ff2d55">A Secret Note For You 💌</h2>
@@ -781,6 +818,43 @@ function revealMemory(card){
 if(card.classList.contains("revealed")) return;
 card.classList.add("revealed");
 }
+
+
+const heartGame=document.getElementById("heartGame");
+const movingHeart=document.getElementById("movingHeart");
+const gameResult=document.getElementById("gameResult");
+const playArea=document.getElementById("playArea");
+
+/* Show game after TOO LATE */
+
+const gameObserver=setInterval(()=>{
+if(tooLate.style.display==="block"){
+heartGame.style.display="block";
+clearInterval(gameObserver);
+}
+},500);
+
+/* Heart movement */
+
+function moveHeart(){
+movingHeart.style.left=Math.random()*180+"px";
+movingHeart.style.top=Math.random()*140+"px";
+}
+
+setInterval(moveHeart,700);
+
+/* Win game */
+
+movingHeart.onclick=()=>{
+movingHeart.style.display="none";
+gameResult.style.display="block";
+
+/* reveal secret note after win */
+setTimeout(()=>{
+secretNote.style.display="block";
+},1000);
+};
+
 
 </script>
 

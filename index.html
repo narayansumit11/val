@@ -64,6 +64,65 @@ to{transform:rotate(360deg);}
 }
 
 
+#tooLateTitle{
+color:#ff2d55;
+font-weight:bold;
+position:relative;
+animation:glitch .8s infinite;
+}
+
+#tooLateTitle:before,
+#tooLateTitle:after{
+content:"TOO LATE 😤";
+position:absolute;
+left:0;
+top:0;
+opacity:.8;
+}
+
+#tooLateTitle:before{
+color:#00ffff;
+animation:glitchTop .8s infinite;
+}
+
+#tooLateTitle:after{
+color:#ff00ff;
+animation:glitchBottom .8s infinite;
+}
+
+@keyframes glitch{
+0%{transform:none}
+20%{transform:skew(-3deg)}
+40%{transform:skew(3deg)}
+60%{transform:skew(-2deg)}
+80%{transform:skew(2deg)}
+100%{transform:none}
+}
+
+@keyframes glitchTop{
+0%{transform:translate(0)}
+50%{transform:translate(-2px,-2px)}
+100%{transform:translate(0)}
+}
+
+@keyframes glitchBottom{
+0%{transform:translate(0)}
+50%{transform:translate(2px,2px)}
+100%{transform:translate(0)}
+}
+
+.shakeScreen{
+animation:screenShake .4s;
+}
+
+@keyframes screenShake{
+0%{transform:translate(0)}
+20%{transform:translate(-8px,6px)}
+40%{transform:translate(8px,-6px)}
+60%{transform:translate(-6px,8px)}
+80%{transform:translate(6px,-8px)}
+100%{transform:translate(0)}
+}
 
 
 
@@ -396,7 +455,8 @@ Actually… No 😈
 
 <div id="tooLate" style="display:none;margin-top:30px;color:white">
 
-<h2 style="color:#ff2d55">TOO LATE 😤</h2>
+<h2 id="tooLateTitle">TOO LATE 😤</h2>
+
 
 <p>You already said YES, which means:</p>
 
@@ -672,25 +732,30 @@ const tooLate=document.getElementById("tooLate");
 
 let loading=false;
 
-changeMind.addEventListener("mouseover",()=>{
+changeMind.addEventListener("click",()=>{
 
-if(loading) return;
+changeMind.style.display="none";
 
-escapeCount++;
+const loader=document.createElement("div");
+loader.innerHTML='<div class="spinner"></div><p style="color:white">Processing breakup… 💔</p>';
+loader.id="loader";
 
-if(escapeCount===1){
-changeMind.style.animation="wiggle .4s";
-setTimeout(()=>changeMind.style.animation="",400);
-}
+document.getElementById("goodChoice").appendChild(loader);
 
-else if(escapeCount===2){
-changeMind.style.transform="scale(0.7)";
-changeMind.style.opacity="0.6";
-}
+setTimeout(()=>{
+loader.remove();
+tooLate.style.display="block";
 
-else if(escapeCount===3){
+/* SCREEN SHAKE */
+document.body.classList.add("shakeScreen");
 
-loading=true;
+setTimeout(()=>{
+document.body.classList.remove("shakeScreen");
+},400);
+
+},2000);
+
+
 
 /* fake breakup processing */
 

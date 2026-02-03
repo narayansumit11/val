@@ -642,21 +642,29 @@ Copyright © Forever. All rights reserved on you 😈
   
 
 <script>
-const noBtn=document.getElementById("no");
-const yesBtn=document.getElementById("yes");
-const gif=document.getElementById("gif");
-const typing=document.getElementById("typing");
-const photo=document.getElementById("photoReveal");
 
-/* NO escape */
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+const gif = document.getElementById("gif");
+const typing = document.getElementById("typing");
+const photo = document.getElementById("photoReveal");
+
+const goodChoice = document.getElementById("goodChoice");
+const changeMind = document.getElementById("changeMind");
+const tooLate = document.getElementById("tooLate");
+const secretNote = document.getElementById("secretNote");
+const envelope = document.getElementById("envelope");
+const finalSections = document.getElementById("finalSections");
+
+/* ------------------ NO BUTTON ESCAPE ------------------ */
 
 noBtn.addEventListener("mouseover",()=>{
 noBtn.style.position="absolute";
-noBtn.style.left=Math.random()*80+"%";
-noBtn.style.top=Math.random()*80+"%";
+noBtn.style.left=Math.random()*70+"%";
+noBtn.style.top=Math.random()*70+"%";
 });
 
-/* Floating hearts */
+/* ------------------ FLOATING BACKGROUND HEARTS ------------------ */
 
 setInterval(()=>{
 let h=document.createElement("div");
@@ -668,7 +676,7 @@ document.body.appendChild(h);
 setTimeout(()=>h.remove(),10000);
 },400);
 
-/* Sparkles */
+/* ------------------ SPARKLES ------------------ */
 
 setInterval(()=>{
 let s=document.createElement("div");
@@ -679,7 +687,7 @@ document.querySelector(".card").appendChild(s);
 setTimeout(()=>s.remove(),1500);
 },300);
 
-/* Typing effect */
+/* ------------------ TYPING EFFECT ------------------ */
 
 function typeText(text){
 let i=0;
@@ -691,26 +699,27 @@ if(i>=text.length) clearInterval(interval);
 },60);
 }
 
+/* ------------------ YES CLICK ------------------ */
 
+yesBtn.addEventListener("click",()=>{
 
-/* typing proposal */
+gif.src="./public/images/happy.gif";
 
-typeText("I promise to make you smile every day 💕 ❤️ 😘 🥰 💘 😍 💝 🤗 💖");
-
-/* photo reveal */
+typeText("I promise to make you smile every day 💕 💝 💖 🤗 😍 💘 🥰 💕 ❤️ 😘 🙌");
 
 setTimeout(()=>photo.style.display="block",2000);
+setTimeout(()=>goodChoice.style.display="block",2500);
 
-/* rose */
+/* ROSE */
 
 let rose=document.createElement("div");
 rose.className="rose";
 rose.innerHTML="🌹";
-document.body.appendChild(rose);
+document.querySelector(".card").appendChild(rose);
 
-/* heart confetti */
+/* CONFETTI */
 
-for(let i=0;i<150;i++){
+for(let i=0;i<120;i++){
 let h=document.createElement("div");
 h.className="heart";
 h.style.left=Math.random()*100+"vw";
@@ -720,14 +729,10 @@ h.style.animationDuration=(Math.random()*2+3)+"s";
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),5000);
 }
-};
 
+});
 
-const goodChoice=document.getElementById("goodChoice");
-
-const tooLate=document.getElementById("tooLate");
-
-let loading=false;
+/* ------------------ CHANGE MIND CLICK ------------------ */
 
 changeMind.addEventListener("click",()=>{
 
@@ -737,7 +742,7 @@ const loader=document.createElement("div");
 loader.innerHTML='<div class="spinner"></div><p style="color:white">Processing breakup… 💔</p>';
 loader.id="loader";
 
-document.getElementById("goodChoice").appendChild(loader);
+goodChoice.appendChild(loader);
 
 setTimeout(()=>{
 loader.remove();
@@ -745,109 +750,13 @@ tooLate.style.display="block";
 
 /* SCREEN SHAKE */
 document.body.classList.add("shakeScreen");
-
-setTimeout(()=>{
-document.body.classList.remove("shakeScreen");
-},400);
+setTimeout(()=>document.body.classList.remove("shakeScreen"),400);
 
 },2000);
 
-
-
-/* fake breakup processing */
-
-changeMind.style.display="none";
-
-const loader=document.createElement("div");
-loader.innerHTML='<div class="spinner"></div><p style="color:white">Processing breakup… 💔</p>';
-loader.id="loader";
-document.getElementById("goodChoice").appendChild(loader);
-
-setTimeout(()=>{
-loader.remove();
-changeMind.style.display="inline-block";
-loading=false;
-},2500);
-
-}
-
-else{
-
-changeMind.style.position="absolute";
-changeMind.style.left=Math.random()*70+"%";
-changeMind.style.top=Math.random()*70+"%";
-
-setTimeout(()=>{
-changeMind.style.display="none";
-tooLate.style.display="block";
-},600);
-}
-
 });
 
-
-  
-
-let escapeCount=0;
-
-
-  const yesBtn = document.getElementById("yes");
-const noBtn = document.getElementById("no");
-
-/* NO button simple escape */
-
-noBtn.addEventListener("mouseover",()=>{
-noBtn.style.position="absolute";
-noBtn.style.left=Math.random()*70+"%";
-noBtn.style.top=Math.random()*70+"%";
-});
-
-/* YES CLICK */
-
-yesBtn.addEventListener("click",()=>{
-
-gif.src="./public/images/happy.gif";
-
-/* typing */
-typeText("I promise to make you smile every day 💕 Will you be mine forever?");
-
-/* show photo */
-setTimeout(()=>photo.style.display="block",2000);
-
-/* show Good Choice */
-setTimeout(()=>goodChoice.style.display="block",2500);
-
-/* 🌹 rose */
-let rose=document.createElement("div");
-rose.className="rose";
-rose.innerHTML="🌹";
-document.querySelector(".card").appendChild(rose);
-
-/* heart confetti */
-for(let i=0;i<100;i++){
-let h=document.createElement("div");
-h.className="heart";
-h.style.left=Math.random()*100+"vw";
-h.style.top="-20px";
-h.style.background=`hsl(${Math.random()*360},100%,70%)`;
-h.style.animationDuration=(Math.random()*2+3)+"s";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),5000);
-}
-
-});
-
-
-
-
-
-
-
-
-const secretNote=document.getElementById("secretNote");
-const envelope=document.getElementById("envelope");
-
-/* show secret note after TOO LATE */
+/* ------------------ SECRET NOTE SHOW ------------------ */
 
 const observer=setInterval(()=>{
 if(tooLate.style.display==="block"){
@@ -856,31 +765,19 @@ clearInterval(observer);
 }
 },500);
 
-/* open envelope */
-
-envelope.onclick=()=>{
-envelope.classList.toggle("open");
-};
-const finalSections=document.getElementById("finalSections");
-
-/* show final sections after secret note */
+/* ------------------ ENVELOPE OPEN ------------------ */
 
 envelope.addEventListener("click",()=>{
+envelope.classList.toggle("open");
 finalSections.style.display="block";
 });
 
-
-  
+/* ------------------ MEMORY REVEAL ------------------ */
 
 function revealMemory(card){
 if(card.classList.contains("revealed")) return;
 card.classList.add("revealed");
 }
-
-
-
-
-  
 
 </script>
 

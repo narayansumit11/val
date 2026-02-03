@@ -63,11 +63,11 @@ animation:spin 1s linear infinite;
 to{transform:rotate(360deg);}
 }
 
-
 #tooLateTitle{
+position:relative;
+display:inline-block;
 color:#ff2d55;
 font-weight:bold;
-position:relative;
 animation:glitch .8s infinite;
 }
 
@@ -77,7 +77,9 @@ content:"TOO LATE 😤";
 position:absolute;
 left:0;
 top:0;
-opacity:.8;
+width:100%;
+text-align:center;
+pointer-events:none;
 }
 
 #tooLateTitle:before{
@@ -88,11 +90,6 @@ animation:glitchTop .8s infinite;
 #tooLateTitle:after{
 color:#ff00ff;
 animation:glitchBottom .8s infinite;
-}
-
-  #tooLateTitle{
-position:relative;
-display:inline-block;
 }
 
 @keyframes glitch{

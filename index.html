@@ -254,15 +254,53 @@ gap:15px;
 margin-top:20px;
 }
 
-.memoryCard img{
-width:100%;
+.memoryCard{
+position:relative;
+background:linear-gradient(135deg,#ff5c8a,#ff87a2);
 border-radius:15px;
+padding:10px;
+cursor:pointer;
+overflow:hidden;
+height:170px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.memoryCard img,
+.memoryCard p{
+opacity:0;
+transform:scale(.7);
+transition:.5s ease;
+position:absolute;
 }
 
 .memoryCard p{
+bottom:8px;
 color:white;
 font-size:12px;
 }
+
+.memoryCard .cover{
+color:white;
+font-size:14px;
+transition:.4s;
+}
+
+.memoryCard.revealed .cover{
+opacity:0;
+}
+
+.memoryCard.revealed img,
+.memoryCard.revealed p{
+opacity:1;
+transform:scale(1);
+}
+
+.memoryCard.revealed{
+padding:8px;
+}
+
 
 
 
@@ -405,9 +443,10 @@ Actually… No 😈
 <div class="loveCard">Tum meri taakat ho 💝</div>
 
 </div>
-</div>
 
-<!-- Memories -->
+
+  
+</div>
 
 <div style="margin-top:50px;text-align:center">
 
@@ -415,32 +454,33 @@ Actually… No 😈
 
 <div class="memoryGrid">
 
-<div class="memoryCard covered" onclick="revealMemory(this)">
-  <span>Tap to reveal 💕</span>
+<div class="memoryCard" onclick="revealMemory(this)">
+  <div class="cover">Tap to reveal 💕</div>
   <img src="./public/images/m1.jpg">
-  <p>First flight 🥹</p>
+  <p>First Flight 🥹</p>
 </div>
 
-<div class="memoryCard covered" onclick="revealMemory(this)">
-  <span>Tap to reveal 💕</span>
+<div class="memoryCard" onclick="revealMemory(this)">
+  <div class="cover">Tap to reveal 💕</div>
   <img src="./public/images/m2.jpg">
-  <p>First pool 😍</p>
+  <p>First Pool 😍</p>
 </div>
 
-<div class="memoryCard covered" onclick="revealMemory(this)">
-  <span>Tap to reveal 💕</span>
+<div class="memoryCard" onclick="revealMemory(this)">
+  <div class="cover">Tap to reveal 💕</div>
   <img src="./public/images/m3.jpg">
-  <p>First movie ❤️</p>
+  <p>First Movie ❤️</p>
 </div>
 
-<div class="memoryCard covered" onclick="revealMemory(this)">
-  <span>Tap to reveal 💕</span>
+<div class="memoryCard" onclick="revealMemory(this)">
+  <div class="cover">Tap to reveal 💕</div>
   <img src="./public/images/m4.jpg">
-  <p>First trip 💕</p>
+  <p>First Trip 💕</p>
 </div>
 
 </div>
 </div>
+
 
 
 
@@ -677,6 +717,10 @@ finalSections.style.display="block";
 
   
 
+function revealMemory(card){
+if(card.classList.contains("revealed")) return;
+card.classList.add("revealed");
+}
 
 
 

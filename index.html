@@ -913,12 +913,8 @@ envelope.classList.toggle("open");
 finalSections.style.display="block";
 });
 
-/* ------------------ MEMORY REVEAL ------------------ */
 
-function revealMemory(card){
-if(card.classList.contains("revealed")) return;
-card.classList.add("revealed");
-}
+
 
 
 const heartGame=document.getElementById("heartGame");
@@ -1023,6 +1019,15 @@ setTimeout(()=>h.remove(),1200);
 }
 
 });
+
+/* ------------------ MEMORY REVEAL ------------------ */
+
+function revealMemory(card){
+if(card.classList.contains("revealed")) return;
+card.classList.add("revealed");
+}
+
+window.revealMemory = revealMemory;
 
 
   

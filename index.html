@@ -443,6 +443,10 @@ You just unlocked unlimited hugs, kisses, and cuddles<br>
 <p style="color:#ff2d55;margin-top:10px">
 Now you're stuck with me forever ∞
 </p>
+  <br>
+  <br>
+  <br>
+<p id="loveTimer" style="color:white;font-size:14px;margin-top:5px"></p>
 
 <br>
   <br>
@@ -856,6 +860,41 @@ setTimeout(()=>{
 secretNote.style.display="block";
 },1000);
 };
+
+
+  /* LOVE TIMER */
+
+const startDate = new Date("2024-08-17T00:00:00"); // <-- CHANGE THIS DATE
+
+const timerEl = document.getElementById("loveTimer");
+
+function updateLoveTimer(){
+
+const now = new Date();
+let diff = now - startDate;
+
+let seconds = Math.floor(diff/1000);
+let minutes = Math.floor(seconds/60);
+let hours = Math.floor(minutes/60);
+let days = Math.floor(hours/24);
+
+let years = Math.floor(days/365);
+days %= 365;
+
+let months = Math.floor(days/30);
+days %= 30;
+
+hours %= 24;
+minutes %= 60;
+seconds %= 60;
+
+timerEl.innerHTML =
+`Since ${years} year : ${months} month : ${days} days : ${hours} Hr : ${minutes} min : ${seconds} sec`;
+}
+
+setInterval(updateLoveTimer,1000);
+updateLoveTimer();
+
 
 
 </script>

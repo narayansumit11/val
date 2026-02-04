@@ -781,6 +781,8 @@ Copyright © Forever. All rights reserved on you 😈
   
 
 <script>
+document.addEventListener("DOMContentLoaded",()=>{
+
 
 const yesBtn = document.getElementById("yes");
 const noBtn = document.getElementById("no");
@@ -989,48 +991,42 @@ setInterval(updateLoveTimer,1000);
 updateLoveTimer();
 
 
-  const kissBtn=document.getElementById("kissBtn");
+ const kissBtn=document.getElementById("kissBtn");
 const hugBtn=document.getElementById("hugBtn");
-const kissBlast=document.getElementById("kissBlast");
-const hugBlast=document.getElementById("hugBlast");
 
-/* KISSES */
-
-kissBtn.onclick=()=>{
+kissBtn.addEventListener("click",()=>{
 
 for(let i=0;i<6;i++){
 let k=document.createElement("div");
 k.className="bigKiss";
 k.innerHTML="💋";
-k.style.position="absolute";
+k.style.position="fixed";
 k.style.left=Math.random()*80+"%";
 k.style.top=Math.random()*60+"%";
-kissBlast.appendChild(k);
+document.body.appendChild(k);
 setTimeout(()=>k.remove(),1200);
 }
 
-};
+});
 
-/* HUGS */
-
-hugBtn.onclick=()=>{
+hugBtn.addEventListener("click",()=>{
 
 for(let i=0;i<5;i++){
 let h=document.createElement("div");
 h.className="bigHug";
 h.innerHTML="🤗";
-h.style.position="absolute";
+h.style.position="fixed";
 h.style.left=Math.random()*80+"%";
 h.style.top=Math.random()*60+"%";
-hugBlast.appendChild(h);
+document.body.appendChild(h);
 setTimeout(()=>h.remove(),1200);
 }
 
-};
+});
 
 
   
-
+});
 </script>
 
 </body>

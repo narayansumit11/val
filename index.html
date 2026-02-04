@@ -21,6 +21,54 @@ font-family:Arial,sans-serif;
 overflow-y:auto;
 }
 
+.loveBtn{
+padding:12px 25px;
+border:none;
+border-radius:25px;
+background:white;
+color:#ff2d55;
+font-size:16px;
+cursor:pointer;
+}
+
+#kissBlast, #hugBlast{
+position:fixed;
+inset:0;
+pointer-events:none;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+/* BIG kiss */
+
+.bigKiss{
+font-size:120px;
+animation:kissPop 1.2s ease forwards;
+}
+
+@keyframes kissPop{
+0%{transform:scale(0);opacity:0}
+50%{transform:scale(1.4);opacity:1}
+100%{transform:scale(1);opacity:0}
+}
+
+/* BIG hug */
+
+.bigHug{
+font-size:120px;
+animation:hugBounce 1.2s ease forwards;
+}
+
+@keyframes hugBounce{
+0%{transform:scale(0)}
+40%{transform:scale(1.3)}
+70%{transform:scale(.9)}
+100%{transform:scale(1);opacity:0}
+}
+
+
 #loveTimer{
 margin-top:10px;
 font-size:18px;
@@ -667,6 +715,34 @@ Which means… you already own it ❤️
   
   <br>
   <br>
+
+
+<!-- Kisses & Hugs -->
+
+<div id="kissesHugs" style="margin-top:60px;text-align:center;color:white">
+
+<h2 style="color:#ff2d55">Emergency Love Station 😈❤️</h2>
+
+<div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:20px">
+
+<button id="kissBtn" class="loveBtn">💋 Click here for Kisses</button>
+<button id="hugBtn" class="loveBtn">🤗 Click here for Hugs</button>
+
+</div>
+
+</div>
+
+<!-- Big animation containers -->
+<div id="kissBlast"></div>
+<div id="hugBlast"></div>
+
+  <br>
+  <br>
+  <br>
+  <br> 
+  <br>
+  <br>
+  <br>
   
 
 
@@ -913,6 +989,47 @@ setInterval(updateLoveTimer,1000);
 updateLoveTimer();
 
 
+  const kissBtn=document.getElementById("kissBtn");
+const hugBtn=document.getElementById("hugBtn");
+const kissBlast=document.getElementById("kissBlast");
+const hugBlast=document.getElementById("hugBlast");
+
+/* KISSES */
+
+kissBtn.onclick=()=>{
+
+for(let i=0;i<6;i++){
+let k=document.createElement("div");
+k.className="bigKiss";
+k.innerHTML="💋";
+k.style.position="absolute";
+k.style.left=Math.random()*80+"%";
+k.style.top=Math.random()*60+"%";
+kissBlast.appendChild(k);
+setTimeout(()=>k.remove(),1200);
+}
+
+};
+
+/* HUGS */
+
+hugBtn.onclick=()=>{
+
+for(let i=0;i<5;i++){
+let h=document.createElement("div");
+h.className="bigHug";
+h.innerHTML="🤗";
+h.style.position="absolute";
+h.style.left=Math.random()*80+"%";
+h.style.top=Math.random()*60+"%";
+hugBlast.appendChild(h);
+setTimeout(()=>h.remove(),1200);
+}
+
+};
+
+
+  
 
 </script>
 
